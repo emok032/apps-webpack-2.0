@@ -35,6 +35,13 @@ module.exports = {
 	  }),
 	  new HtmlWebpackPlugin({ // automate <script> additions/changes
 	  	template: 'src/index.html' // now can move the root index.html to this template location
+	  }),
+	  new webpack.DefinePlugin({ // used to define window scope variables to be defined in JS output files
+	  	// When React run, it looks for this window scope - process.env.NODE_ENV
+	  	// If finds it, and it equals a string production - it will behave differently; React will not run many error-checking, which can be good
+	  	// Assumes we do not want more error-checking (it is for development more)
+	  	'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) // so for PRODUCTION - will prevent any error-checking
+	  	// (left: variable to find) : (right: variable how defined)
 	  })
   ]
 };

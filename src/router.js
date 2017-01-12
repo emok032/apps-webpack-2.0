@@ -15,7 +15,7 @@ const componentRoutes = {
   indexRoute: { component: ArtistMain},
   childRoutes: [
     {
-      path:'artists/new'
+      path:'artists/new',
 
       // *by default, React-Router assumes that all desired components are already loaded up
       // but for Asynchronous loading, will need getComponent()s
@@ -26,17 +26,18 @@ const componentRoutes = {
           .then(module => cb(null, module.default));
         // remember System.import('') - webpack will automatically modify the bundle that is generated to split off the module that is called
         // Gotcha's: cb(error argument,)
+        // Note: Webpack manually scans for System.import() calls so a help function cannot be used to minimize this code whenusing webpack (b/c of limitations)
       }
     },
     {
-      path:'artists/:id'
+      path:'artists/:id',
       getComponent(location, cb) { 
-        System.import('./components/artists/Artist Detail')
+        System.import('./components/artists/ArtistDetail')
           .then(module => cb(null, module.default));
       }
     },
     {
-      path:'artists/:id/edit'
+      path:'artists/:id/edit',
       getComponent(location, cb) { 
         System.import('./components/artists/ArtistEdit')
           .then(module => cb(null, module.default));
