@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 
-// server routes...
+// Server routes...
 app.get('/hello', (req, res) => res.send({ hi: 'hello'}));
 
 /* process.env goes after any Database or Server Routes/Handlers code */
